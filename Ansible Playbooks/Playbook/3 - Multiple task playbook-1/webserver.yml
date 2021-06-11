@@ -1,32 +1,33 @@
 ---
-   - hosts: webservers
-     become: True 
+   - hosts: web
+     become: True
      become_user: root
-     tasks: 
-      - name: Installing httpd  firewalld packge 
+     tasks:
+      - name: Installing httpd  firewalld packge
         yum:
-          - httpd
-          - firewalld 
-      - name: Creating index.html 
+          name:
+            - httpd
+            - firewalld
+      - name: Creating index.html
         copy:
           content: "Welcome to new automation\n"
           dest: /var/www/html/index.html
 
-      - name: Firewalld start and enabled  
+      - name: Firewalld start and enabled
         service:
-          name: firewalld 
+          name: firewalld
           state: started
-          enabled: True 
+          enabled: True
 
-      - name: FIrewalld permits access to http service 
+      - name: FIrewalld permits access to http service
         firewalld:
             service: http
-            permanent: True 
-            state: enabled 
-            immediate: yes 
+            permanent: True
+            state: enabled
+            immediate: yes
 
-      - name: Httpd start and enabled 
-        service: 
+      - name: Httpd start and enabled
+        service:
           name: httpd
           state: started
           enabled: True
