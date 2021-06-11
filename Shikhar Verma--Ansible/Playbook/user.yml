@@ -1,0 +1,2 @@
+# Simple playbook for user creation 
+# ansible web -m user -a "name=ansadmin uid=4042 state=present" --become
